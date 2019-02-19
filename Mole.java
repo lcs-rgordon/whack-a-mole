@@ -20,8 +20,12 @@ public class Mole extends Actor
         // Check for mouse press on this actor
         if (Greenfoot.mouseClicked(this) == true)
         {
-            world.showText("ouch", Greenfoot.getRandomNumber(500), Greenfoot.getRandomNumber(500));
+            // Track that a mole was whacked
             world.moleWhacked();
+            
+            // Remove this object (this instance of the Mole class)
+            // from the world
+            world.removeObject(this);
         }
     }    
 }
