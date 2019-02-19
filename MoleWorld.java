@@ -34,13 +34,11 @@ public class MoleWorld extends World
     
     public void act()
     {
-
-        // Every 60 frames, update the time
-        if ((frames % 60) == 0)
-        {
-            String timeElapsed = "Time: " + Integer.toString(frames / 60);
-            showText(timeElapsed, 100, 50);
-        }
+        // Track time
+        updateTime();
+        
+        // Add a mole
+        addMole();
         
         // Increment frame (roughly 60 frames per second)
         frames = frames + 1;
@@ -55,5 +53,40 @@ public class MoleWorld extends World
         // Update the score
         String currentScore = "Score: " + Integer.toString(molesWhacked);
         showText(currentScore, 500, 50);
+    }
+    
+    // Track the time
+    private void updateTime()
+    {
+        // Every 60 frames (every 1 second) update the time
+        if ((frames % 60) == 0)
+        {
+            String timeElapsed = "Time: " + Integer.toString(frames / 60);
+            showText(timeElapsed, 100, 50);
+        }
+    }
+    
+    // Add a new mole
+    private void addMole()
+    {
+        // Every 120 frames (every 2 seconds) add a new mole
+        if ((frames % 120) == 0)
+        {
+            Mole newMole = new Mole();
+           
+            // Random horizontal position
+            int x = Greenfoot.getRandomNumber(500);
+            // Ensure the mole doesn't appear off the left or right edge
+            x += 50;
+            
+            // Random vertical position
+            int y = Greenfoot.getRandomNumber(200);
+            // Ensure mole doesn't appear behind score or time or below
+            // bottom of screen 
+            y += 150;
+            
+            // Add the mole
+            this.addObject(newMole, x, y);
+        }
     }
 }
