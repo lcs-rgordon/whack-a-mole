@@ -22,6 +22,14 @@ public class MoleWorld extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
+        
+        // Set the initial time
+        String initialTime = "Time: 0";
+        showText(initialTime, 100, 50);
+        
+        // Set the initial score
+        String currentScore = "Score: 0";
+        showText(currentScore, 500, 50);
     }
     
     public void act()
@@ -30,8 +38,8 @@ public class MoleWorld extends World
         // Every 60 frames, update the time
         if ((frames % 60) == 0)
         {
-            String timeElapsed = Integer.toString(frames / 60);
-            showText(timeElapsed, 100, 100);
+            String timeElapsed = "Time: " + Integer.toString(frames / 60);
+            showText(timeElapsed, 100, 50);
         }
         
         // Increment frame (roughly 60 frames per second)
@@ -43,5 +51,9 @@ public class MoleWorld extends World
     void moleWhacked()
     {
         molesWhacked = molesWhacked + 1;
+        
+        // Update the score
+        String currentScore = "Score: " + Integer.toString(molesWhacked);
+        showText(currentScore, 500, 50);
     }
 }
