@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class MoleWorld extends World
 {
     // Track time going up
-    private int frames = 0;
+    private int frames = 1;
     
     // Track mole presses
     private int molesWhacked = 0;
@@ -39,6 +39,9 @@ public class MoleWorld extends World
         
         // Add a mole
         addMole();
+        
+        // Check for end of game
+        checkEndGame();
         
         // Increment frame (roughly 60 frames per second)
         frames = frames + 1;
@@ -87,6 +90,21 @@ public class MoleWorld extends World
             
             // Add the mole
             this.addObject(newMole, x, y);
+        }
+    }
+    
+    // Track the time
+    private void checkEndGame()
+    {
+        // After 60 seconds (60 fps * 60) so 3600 frames
+        // end the game
+        if ((frames % 3600) == 0)
+        {
+            Greenfoot.stop();
+            
+            // Show a game over message
+            String endOfGameMessage = "Game Over";
+            showText(endOfGameMessage, 300, 200);
         }
     }
 }
